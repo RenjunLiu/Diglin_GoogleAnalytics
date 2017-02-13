@@ -51,3 +51,21 @@ $_accountId = $_helper->getAccountId();
         <!-- END GOOGLE ANALYTICS CODE -->
     <?php endif; ?>
 <?php endif; ?>
+
+<?php if (strpos($_SERVER['SERVER_NAME'],"cn") !== false):?>
+    <!-- Google Tag Manager CN Diglin ga.phtml -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-PBX6V5');</script>
+    <!-- End Google Tag Manager -->
+<?php else:?>
+    <!-- Google Tag Manager US Diglin ga.phtml -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-WR2PPB');</script>
+    <!-- End Google Tag Manager -->
+<?php endif;?>
