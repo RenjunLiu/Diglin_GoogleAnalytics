@@ -100,13 +100,14 @@ class Diglin_GoogleAnalytics_Block_Ga extends Mage_GoogleAnalytics_Block_Ga
         foreach ($collection as $order) {
             $baseToGlobalRate = $order->getBaseToGlobalRate();
 
-            $result[] = sprintf("ga('ecommerce:addTransaction', {'id':'%s','affiliation':'%s','revenue':'%s','shipping':'%s','tax':'%s','currency':'%s'})",
+            $result[] = sprintf("ga('ecommerce:addTransaction', {'id':'%s','affiliation':'%s','revenue':'%s','shipping':'%s','tax':'%s','currency':'%s','coupon':'%s'})",
                 $order->getIncrementId(),
                 $this->jsQuoteEscape(Mage::app()->getStore()->getFrontendName()),
                 $order->getBaseGrandTotal() * $baseToGlobalRate,
                 $order->getBaseShippingAmount() * $baseToGlobalRate,
                 $order->getBaseTaxAmount() * $baseToGlobalRate,
-                $order->getGlobalCurrencyCode()
+                $order->getGlobalCurrencyCode(),
+                $order->getCouponCode()
             );
 
             foreach ($order->getAllVisibleItems() as $item) {
@@ -229,10 +230,10 @@ class Diglin_GoogleAnalytics_Block_Ga extends Mage_GoogleAnalytics_Block_Ga
         $categoryList = "";
         $categories = $product->getCategoryCollection()->exportToArray(); // get list of categories
         foreach ($categories as $category) {
-            $categoryList .= Mage::getModel('catalog/category')->load($category['entity_id'])->getName() . "|";
+            $categoryList .= Mage::getModel('catalog/category')->load($category['entity_id'])->getName() . "/";
         }
 
-        return $this->jsQuoteEscape(rtrim($categoryList, "|"));
+        return $this->jsQuoteEscape(rtrim($categoryList, "/"));
     }
 
     /**
